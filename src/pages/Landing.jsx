@@ -156,7 +156,7 @@ export default function Landing() {
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Simple Pricing</h2>
           <p className="text-lg text-foreground/70 mb-16 max-w-2xl">No surprises. No hidden fees. Just honest pricing.</p>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl">
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xlsnap-center">
             {/* Starter */}
             <div className="p-8 bg-white rounded-lg border border-border hover:shadow-lg transition-shadow">
               <h3 className="text-xl font-display font-bold mb-2">Starter</h3>

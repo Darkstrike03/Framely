@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 import { Laptop, Palette, Code, Shield, Clock, DollarSign, Headphones, Star, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import HeroEditorialCarousel from '@/components/HeroEditorialCarousel'
+import TemplatePeekCard from '@/components/TemplatePeekCard'
+import { FEATURED_TEMPLATES } from '@/data/templates'
 
 export default function Home() {
   return (
@@ -39,11 +42,9 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className="hidden md:flex justify-center">
-            <div className="relative">
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 shadow-2xl">
-                <Laptop size={300} className="text-primary/80" />
-              </div>
+          <div className="hidden md:flex justify-center min-w-0">
+            <div className="relative shrink-0">
+              <HeroEditorialCarousel />
               <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-semibold">
                 Starting at ₹5,999
               </div>
@@ -94,7 +95,7 @@ export default function Home() {
       {/* Divider */}
       <div className="flex justify-center py-8 opacity-30">
         <img
-          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663561717216/8X3uCMdtZdep275iiDXgZb/framely-leaf-pattern-EuqQ7kMkVYcBvXND5dk86s.webp"
+          src="/middle-image.webp"
           alt="Divider"
           className="w-full max-w-2xl h-auto"
         />
@@ -130,27 +131,38 @@ export default function Home() {
       </section>
 
       {/* Templates Preview Section */}
-      <section className="py-20 md:py-32 bg-white">
-        <div className="container">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-center">Our Templates</h2>
-          <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">Beautiful designs ready for your business</p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-background rounded-lg h-48 flex items-center justify-center border border-border hover:shadow-lg transition-shadow">
-                <span className="text-foreground/50">Template {i}</span>
-              </div>
-            ))}
+        <section className="py-20 md:py-32 bg-white">
+          <div className="container px-4 mx-auto">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-center">Our Templates</h2>
+            <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">
+              Hover or scroll each preview to explore the full design.
+            </p>
+            
+            {/* Changed grid-cols-1 to grid-cols-2 for mobile view, 
+              decreased mobile gap slightly (gap-4) so cards don't look cramped 
+            */}
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+              {/* Added .slice(0, 8) to strictly limit the initial output count */}
+              {FEATURED_TEMPLATES.slice(0, 8).map((template) => (
+                <TemplatePeekCard
+                  key={template.id}
+                  name={template.name}
+                  tier={template.tier}
+                  image={template.image}
+                />
+              ))}
+            </div>
+            
+            <div className="text-center">
+              <Link to="/templates">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                  View All Templates
+                  <ArrowRight size={18} className="ml-2" />
+                </Button>
+              </Link>
+            </div>
           </div>
-          <div className="text-center">
-            <Link to="/templates">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                View All Templates
-                <ArrowRight size={18} className="ml-2" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
 
       {/* Testimonials Section */}
       <section className="py-20 md:py-32 bg-background">

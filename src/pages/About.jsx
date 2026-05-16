@@ -28,8 +28,7 @@ export default function About() {
           </div>
           <div className="flex justify-center">
             <div className="bg-muted rounded-lg p-8 shadow-lg border border-border">
-              <Users size={300} className="text-primary/50" />
-              <p className="text-center text-foreground/50 mt-4">Team Photo Placeholder</p>
+              <img size={300} src="/About-Us.webp" className="w-full max-w-2xl h-auto rounded-2xl" />
             </div>
           </div>
         </section>

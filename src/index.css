@@ -199,6 +199,18 @@
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
 
+  .template-peek-scroll {
+    scroll-snap-type: y proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .template-peek-scroll img {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+
   @media (min-width: 640px) {
     .container {
       padding-left: 1.5rem;
