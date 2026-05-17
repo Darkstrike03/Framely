@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import ChainDivider from '@/components/ChainDivider'
 import { Laptop, Palette, Code, Shield, Clock, DollarSign, Headphones, Star, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import HeroEditorialCarousel from '@/components/HeroEditorialCarousel'
@@ -54,13 +55,7 @@ export default function Home() {
       </section>
 
       {/* Divider */}
-      <div className="flex justify-center py-8 opacity-30">
-        <img
-          src="/middle-image.webp"
-          alt="Divider"
-          className="w-full max-w-2xl h-auto"
-        />
-      </div>
+      <ChainDivider />
 
       {/* What We Do Section */}
       <section className="py-20 md:py-32 bg-white">
@@ -93,13 +88,7 @@ export default function Home() {
       </section>
 
       {/* Divider */}
-      <div className="flex justify-center py-8 opacity-30">
-        <img
-          src="/middle-image.webp"
-          alt="Divider"
-          className="w-full max-w-2xl h-auto"
-        />
-      </div>
+      <ChainDivider />
 
       {/* Why Framely Section */}
       <section className="py-20 md:py-32 bg-background">
@@ -130,39 +119,46 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Divider */}
+      <ChainDivider />
+
       {/* Templates Preview Section */}
-        <section className="py-20 md:py-32 bg-white">
-          <div className="container px-4 mx-auto">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-center">Our Templates</h2>
-            <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">
-              Hover or scroll each preview to explore the full design.
-            </p>
-            
-            {/* Changed grid-cols-1 to grid-cols-2 for mobile view, 
+      <section className="py-20 md:py-32 bg-white">
+        <div className="container px-4 mx-auto">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-center">Our Templates</h2>
+          <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">
+            Hover or scroll each preview to explore the full design.
+          </p>
+
+          {/* Changed grid-cols-1 to grid-cols-2 for mobile view, 
               decreased mobile gap slightly (gap-4) so cards don't look cramped 
             */}
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
-              {/* Added .slice(0, 8) to strictly limit the initial output count */}
-              {FEATURED_TEMPLATES.slice(0, 8).map((template) => (
-                <TemplatePeekCard
-                  key={template.id}
-                  name={template.name}
-                  tier={template.tier}
-                  image={template.image}
-                />
-              ))}
-            </div>
-            
-            <div className="text-center">
-              <Link to="/templates">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                  View All Templates
-                  <ArrowRight size={18} className="ml-2" />
-                </Button>
-              </Link>
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+            {/* Added .slice(0, 8) to strictly limit the initial output count */}
+            {FEATURED_TEMPLATES.slice(0, 8).map((template) => (
+              <TemplatePeekCard
+                key={template.id}
+                name={template.name}
+                tier={template.tier}
+                image={template.image}
+              />
+            ))}
           </div>
-        </section>
+
+          <div className="text-center">
+            <Link to="/templates">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                View All Templates
+                <ArrowRight size={18} className="ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <ChainDivider />
+
 
       {/* Testimonials Section */}
       <section className="py-20 md:py-32 bg-background">

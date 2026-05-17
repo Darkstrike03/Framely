@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles, Globe, Palette, Zap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import ChainDivider from '@/components/ChainDivider'
 
 /**
  * Framely Landing Page - Revamped UI
@@ -97,13 +98,7 @@ export default function Landing() {
       </section>
 
       {/* Divider */}
-      <div className="flex justify-center py-8 opacity-30">
-        <img
-          src="/middle-image.webp"
-          alt="Divider"
-          className="w-full max-w-2xl h-auto"
-        />
-      </div>
+      <ChainDivider />
 
       {/* Services Section */}
       <section className="py-20 md:py-32 bg-white">
@@ -142,13 +137,7 @@ export default function Landing() {
       </section>
 
       {/* Divider */}
-      <div className="flex justify-center py-8 opacity-30">
-        <img
-          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663561717216/8X3uCMdtZdep275iiDXgZb/framely-leaf-pattern-EuqQ7kMkVYcBvXND5dk86s.webp"
-          alt="Divider"
-          className="w-full max-w-2xl h-auto"
-        />
-      </div>
+      <ChainDivider />
 
       {/* Pricing Section */}
       <section className="py-20 md:py-32 bg-background">
