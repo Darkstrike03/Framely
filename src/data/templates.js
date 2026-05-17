@@ -109,7 +109,7 @@ export const TEMPLATES = [
     image: '/cafeandrest/temp9.webp',
   },
   {
-      id: 15,
+    id: 15,
     category: 'cafe',
     name: 'Dhaba Style',
     tier: 'Basic',
@@ -287,6 +287,76 @@ export const TEMPLATES = [
     tier: 'Basic',
     image: '/generalbuisness/temp10.webp',
   },
+  {
+    id: 39,
+    category: 'Premium',
+    name: 'Spaces',
+    tier: 'Premium',
+    image: '/premium/temp1.webp',
+  },
+  {
+    id: 40,
+    category: 'Premium',
+    name: 'Timeless',
+    tier: 'Premium',
+    image: '/premium/temp2.webp',
+  },
+  {
+    id: 41,
+    category: 'Premium',
+    name: 'Still',
+    tier: 'Premium',
+    image: '/premium/temp3.webp',
+  },
+  {
+    id: 42,
+    category: 'Aurora',
+    name: 'Premium Business',
+    tier: 'Premium',
+    image: '/premium/temp4.webp',
+  },
+  {
+    id: 43,
+    category: 'Distill',
+    name: 'Premium Business',
+    tier: 'Premium',
+    image: '/premium/temp5.webp',
+  },
+  {
+    id: 44,
+    category: 'Premium',
+    name: 'Filter',
+    tier: 'Premium',
+    image: '/premium/temp6.webp',
+  },
+  {
+    id: 45,
+    category: 'Premium',
+    name: 'Elegant',
+    tier: 'Premium',
+    image: '/premium/temp7.webp',
+  },
+  {
+    id: 46,
+    category: 'Premium',
+    name: 'Vibrant',
+    tier: 'Premium',
+    image: '/premium/temp8.webp',
+  },
+  {
+    id: 47,
+    category: 'Premium',
+    name: 'Numeric',
+    tier: 'Premium',
+    image: '/premium/temp9.webp',
+  },
+  {
+    id: 48,
+    category: 'Premium',
+    name: 'Sukuna',
+    tier: 'Premium',
+    image: '/premium/temp10.webp',
+  }
 ]
 
 export const FEATURED_TEMPLATES = TEMPLATES.filter((t) => t.featured)
@@ -297,4 +367,5 @@ export const TEMPLATE_CATEGORIES = [
   { id: 'clinic', name: 'Clinic & Healthcare' },
   { id: 'salon', name: 'Salon & Beauty' },
   { id: 'business', name: 'General Business' },
+  { id: 'Premium', name: 'Premium' },
 ]

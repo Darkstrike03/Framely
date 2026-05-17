@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Services from './pages/Services'
 import Templates from './pages/Templates'
 import About from './pages/About'
+import Policy from './pages/Policy'
 import Contact from './pages/Contact'
 import WhatsAppButton from './components/WhatsAppButton'
 import Landing from './pages/Landing'
@@ -44,6 +45,7 @@ function App() {
           <Route path="/templates" element={<Templates />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/policy" element={<Policy />} />
         </Routes>
         <WhatsAppButton />
         <ScrollLeaves />

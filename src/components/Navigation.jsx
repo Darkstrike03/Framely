@@ -12,6 +12,7 @@ export default function Navigation() {
     { name: 'Templates', path: '/templates' },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
+    { name: 'Policy', path: '/policy' },
   ]
 
   return (

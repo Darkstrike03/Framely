@@ -87,9 +87,9 @@ export default function TemplatePeekViewport({ image, name, variant = 'card', cl
               styles.hint,
             )}
           >
-            <ChevronDown size={12} className="max-md:animate-bounce" />
-            <span className="max-md:hidden">Hover to explore</span>
-            <span className="md:hidden">Scroll to explore</span>
+            <ChevronDown size={12} className="animate-bounce md:animate-none" />
+            <span className="hidden lg:inline">Hover to explore</span>
+            <span className="hidden sm:inline lg:hidden">Scroll to explore</span>
           </div>
         </>
       )}
