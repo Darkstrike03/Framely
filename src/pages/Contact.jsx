@@ -1,8 +1,34 @@
-import { useState } from 'react'
-import { Mail, MessageCircle } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { Mail, MessageCircle, Loader2, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
+const OFFICIAL_EMAIL = 'helloframely.in@gmail.com'
+
+const BUSINESS_TYPE_LABELS = {
+  cafe: 'Cafe & Restaurant',
+  clinic: 'Clinic & Healthcare',
+  salon: 'Salon & Beauty',
+  retail: 'Retail Store',
+  service: 'Service Business',
+  other: 'Other',
+}
+
+const PACKAGE_LABELS = {
+  starter: 'Starter (₹5,999)',
+  standard: 'Standard (₹14,999)',
+  premium: 'Premium (₹28,999)',
+  'not-sure': 'Not Sure',
+}
+
+function buildTemplateMessage(templateName) {
+  return `I'm interested in the "${templateName}" template.`
+}
+
 export default function Contact() {
+  const [searchParams] = useSearchParams()
+  const templateFromUrl = searchParams.get('template')
+
   const [formData, setFormData] = useState({
     name: '',
     businessName: '',
@@ -10,37 +36,69 @@ export default function Contact() {
     email: '',
     businessType: '',
     lookingFor: '',
+    selectedTemplate: '',
     message: '',
   })
+  const [status, setStatus] = useState('idle') // idle | submitting | success | error
+  const [statusMessage, setStatusMessage] = useState('')
+
+  useEffect(() => {
+    if (!templateFromUrl) return
+
+    setFormData((prev) => ({
+      ...prev,
+      selectedTemplate: templateFromUrl,
+      message: buildTemplateMessage(templateFromUrl),
+    }))
+  }, [templateFromUrl])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setStatus('idle')
+    setStatusMessage('')
 
-    // In Vite, environment variables are prefixed with VITE_
-    // You can set this in your .env file or Vercel / GitHub Secrets dashboard
-    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
 
     if (!accessKey) {
-      alert('Form integration is pending. Please configure your API key in the environment variables.');
-      return;
+      setStatus('error')
+      setStatusMessage(
+        'Form is not configured yet. Please email us directly or use WhatsApp.',
+      )
+      return
     }
 
+    setStatus('submitting')
+
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           access_key: accessKey,
-          ...formData,
+          subject: `Framely inquiry — ${formData.businessName} (${formData.name})${
+            formData.selectedTemplate ? ` — ${formData.selectedTemplate} template` : ''
+          }`,
+          from_name: 'Framely Contact Form',
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          business_name: formData.businessName,
+          business_type: BUSINESS_TYPE_LABELS[formData.businessType] ?? formData.businessType,
+          package_interest: PACKAGE_LABELS[formData.lookingFor] ?? formData.lookingFor,
+          selected_template: formData.selectedTemplate || 'Not specified',
+          message: formData.message || '(No additional message)',
+          botcheck: '',
         }),
-      });
+      })
 
-      const result = await response.json();
+      const result = await response.json()
+
       if (result.success) {
-        alert('Thank you for your message! We will get back to you soon.')
+        setStatus('success')
+        setStatusMessage('Thank you! Your message was sent. We typically reply within 24 hours.')
         setFormData({
           name: '',
           businessName: '',
@@ -48,14 +106,17 @@ export default function Contact() {
           email: '',
           businessType: '',
           lookingFor: '',
+          selectedTemplate: '',
           message: '',
         })
       } else {
-        alert('Something went wrong. Please try again or reach out on WhatsApp.');
+        setStatus('error')
+        setStatusMessage(result.message || 'Something went wrong. Please try again or use WhatsApp.')
       }
     } catch (error) {
-      console.error(error);
-      alert('Error submitting form. Please reach out via WhatsApp instead.');
+      console.error(error)
+      setStatus('error')
+      setStatusMessage('Could not send your message. Please try WhatsApp or email us directly.')
     }
   }
 
@@ -66,9 +127,8 @@ export default function Contact() {
     })
   }
 
-  const whatsappNumber = "919876543210" // Replace with actual number
+  const whatsappNumber = '919876543210' // Replace with actual number
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=Hi%20Framely!%20I'm%20interested%20in%20getting%20a%20website.`
-  const email = "hello@framely.in" // Replace with actual email
 
   return (
     <div className="min-h-screen bg-background text-foreground py-20">
@@ -84,6 +144,22 @@ export default function Contact() {
           {/* Contact Form */}
           <div className="bg-white rounded-lg p-8 shadow-sm border border-border">
             <form onSubmit={handleSubmit} className="space-y-6">
+              <input
+                type="checkbox"
+                name="botcheck"
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
+
+              {formData.selectedTemplate && (
+                <div className="rounded-lg border border-primary/25 bg-primary/5 px-4 py-3 text-sm">
+                  <span className="text-foreground/70">Selected template: </span>
+                  <strong className="text-primary">{formData.selectedTemplate}</strong>
+                </div>
+              )}
+
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                   Name *
@@ -205,8 +281,35 @@ export default function Contact() {
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-                Send Message
+              {statusMessage && (
+                <p
+                  role="status"
+                  className={`rounded-lg px-4 py-3 text-sm ${
+                    status === 'success'
+                      ? 'bg-primary/10 text-primary border border-primary/20'
+                      : 'bg-destructive/10 text-destructive border border-destructive/20'
+                  }`}
+                >
+                  {status === 'success' && (
+                    <CheckCircle2 size={16} className="inline mr-2 -mt-0.5" aria-hidden="true" />
+                  )}
+                  {statusMessage}
+                </p>
+              )}
+
+              <Button
+                type="submit"
+                disabled={status === 'submitting'}
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground disabled:opacity-70"
+              >
+                {status === 'submitting' ? (
+                  <>
+                    <Loader2 size={18} className="mr-2 animate-spin" />
+                    Sending…
+                  </>
+                ) : (
+                  'Send Message'
+                )}
               </Button>
             </form>
           </div>
@@ -221,8 +324,11 @@ export default function Contact() {
                   <Mail size={24} className="text-primary mr-4 flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-display font-semibold mb-1">Email</h3>
-                    <a href={`mailto:${email}`} className="text-foreground/70 hover:text-primary transition">
-                      {email}
+                    <a
+                      href={`mailto:${OFFICIAL_EMAIL}`}
+                      className="text-foreground/70 hover:text-primary transition break-all"
+                    >
+                      {OFFICIAL_EMAIL}
                     </a>
                   </div>
                 </div>

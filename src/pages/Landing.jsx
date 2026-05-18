@@ -1,6 +1,7 @@
 import { ArrowRight, Sparkles, Globe, Palette, Zap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import ChainDivider from '@/components/ChainDivider'
+import { Logo } from '@/components/Logo'
 
 /**
  * Framely Landing Page - Revamped UI
@@ -19,7 +20,7 @@ export default function Landing() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="container flex items-center justify-between py-4">
-          <div className="text-2xl font-display font-bold text-primary">Framely</div>
+          <Logo />
           <Button onClick={handleGetStarted} className="bg-primary hover:bg-primary/90 text-primary-foreground">
             Get Started
           </Button>

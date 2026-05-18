@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import ChainDivider from '@/components/ChainDivider'
-import { Laptop, Palette, Code, Shield, Clock, DollarSign, Headphones, Star, ArrowRight } from 'lucide-react'
+import { Laptop, Palette, Code, Shield, Clock, DollarSign, Headphones, ArrowRight } from 'lucide-react'
+import TestimonialsSection from '@/components/TestimonialsSection'
 import { Button } from '@/components/ui/button'
 import HeroEditorialCarousel from '@/components/HeroEditorialCarousel'
 import TemplatePeekCard from '@/components/TemplatePeekCard'
@@ -160,28 +161,7 @@ export default function Home() {
       <ChainDivider />
 
 
-      {/* Testimonials Section */}
-      <section className="py-20 md:py-32 bg-background">
-        <div className="container">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-16 text-center">What Our Clients Say</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-white p-8 rounded-lg border border-border hover:shadow-lg transition-shadow">
-                <div className="flex mb-4">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} size={16} className="text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-foreground/70 mb-4 italic">
-                  "Framely made getting our website online so easy. Great communication and beautiful work!"
-                </p>
-                <p className="font-display font-semibold">— Client Name</p>
-                <p className="text-sm text-foreground/50">Business Type</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialsSection />
 
       {/* CTA Banner */}
       <section className="py-20 md:py-32 bg-primary text-primary-foreground text-center">

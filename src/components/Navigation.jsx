@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+import { LogoLink } from '@/components/Logo'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -18,9 +18,7 @@ export default function Navigation() {
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container flex items-center justify-between py-4">
-        <Link to="/" className="text-2xl font-display font-bold text-primary">
-          Framely🌿
-        </Link>
+        <LogoLink />
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8">

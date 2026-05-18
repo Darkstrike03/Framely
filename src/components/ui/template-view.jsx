@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { Link } from 'react-router-dom'
 import { X } from 'lucide-react'
 import TemplatePeekViewport from '@/components/TemplatePeekViewport'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
-export function TemplateView({ open, onClose, image, name, tier }) {
+export function TemplateView({ open, onClose, image, name, tier, bookHref }) {
   useEffect(() => {
     if (!open) return
 
@@ -67,6 +69,16 @@ export function TemplateView({ open, onClose, image, name, tier }) {
         </div>
 
         <TemplatePeekViewport image={image} name={name} variant="modal" />
+
+        {bookHref && (
+          <div className="mt-4 flex justify-end">
+            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Link to={bookHref} onClick={onClose}>
+                Book this template
+              </Link>
+            </Button>
+          </div>
+        )}
       </div>
     </div>,
     document.body,
