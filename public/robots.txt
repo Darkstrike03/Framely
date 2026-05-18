@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://framely.in/sitemap.xml

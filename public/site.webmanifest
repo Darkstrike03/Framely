@@ -1,0 +1,25 @@
+{
+  "name": "Framely — Websites for Indian Small Businesses",
+  "short_name": "Framely",
+  "description": "Professional, affordable websites for cafes, clinics, salons, and small businesses across India.",
+  "start_url": "/",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#2D5016",
+  "background_color": "#FAFAF8",
+  "display": "standalone",
+  "lang": "en-IN"
+}
