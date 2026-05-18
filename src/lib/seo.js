@@ -12,7 +12,7 @@ export const SITE = {
   country: 'IN',
   region: 'India',
   themeColor: '#2D5016',
-  ogImage: '/hero-image.webp',
+  ogImage: '/ogImage.webp',
 }
 
 export const ROUTE_SEO = {
